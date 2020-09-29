@@ -18,7 +18,6 @@ module.exports = class DepthCalculator {
       if (i > depth) depth = i;
     });
     depth++;
-    console.log(depth);
     return depth;
   }
 };

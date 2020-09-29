@@ -1,7 +1,6 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function createDreamTeam( members ) {
-  // remove line with error and write your code here
   let arr = [];
   if(!(members instanceof Array)) return false;
   members.forEach(function (element) {

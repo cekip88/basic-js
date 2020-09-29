@@ -5,8 +5,7 @@ const chainMaker = {
   getLength() {
     let i = 0;
     for (let key in this.chain){
-      let j = key * 1;
-      if(j > i) i = j;
+      i++;
     }
     return i;
   },
@@ -24,6 +23,12 @@ const chainMaker = {
   },
   removeLink(position) {
     if (typeof position !== 'number' || (isNaN(position)) || (position % 1))  {
+      this.chain = {};
+      throw new CustomError('Not implemented');
+    }
+
+    if(this.chain[`${position}`] === undefined) {
+      this.chain = {};
       throw new CustomError('Not implemented');
     }
 
@@ -31,7 +36,7 @@ const chainMaker = {
     for (let key in this.chain){
       if (key > position) {
         this.chain[key - 1] = this.chain[key];
-        delete  this.chain[key]
+        delete this.chain[key]
       }
     }
     return chainMaker;

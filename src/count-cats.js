@@ -13,5 +13,4 @@ module.exports = function countCats( matrix ) {
     }
   });
   return arr.length;
-  // remove line with error and write your code here
 };
