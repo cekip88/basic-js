@@ -8,7 +8,7 @@ class VigenereCipheringMachine {
   }
 
   validateIncomeData(message,key){
-    if (!message || !key) throw new CustomError('Not implemented');
+    if (!message || !key) throw new Error();
   }
   reverseText(text){
     let res = '';

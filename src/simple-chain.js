@@ -24,12 +24,12 @@ const chainMaker = {
   removeLink(position) {
     if (typeof position !== 'number' || (isNaN(position)) || (position % 1))  {
       this.chain = {};
-      throw new CustomError('Not implemented');
+      throw new Error();
     }
 
     if(this.chain[`${position}`] === undefined) {
       this.chain = {};
-      throw new CustomError('Not implemented');
+      throw new Error();
     }
 
     delete this.chain[`${position}`];
