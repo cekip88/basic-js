@@ -1,53 +1,37 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function transform( arr ) {
-
   if(!Array.isArray(arr)) throw new Error();
+  let resultArray = [];
 
-  let arr2 = [];
+  for (let i = 0; i < arr.length; i++) {
+    let element = arr[i];
 
-  for(let i = 0; i < arr.length; i++) {
-    if (arr[i] === '--discard-next') {}
-
-    else if (arr[i] === '--discard-prev') {
-      if(i > 0){
-        let prevArr2 = arr2[arr2.length - 1], prevArr = arr[i - 1];
-        if(isNaN(prevArr2)) {
-          prevArr2 += '';
-          prevArr += '';
-        }
-        if (prevArr2 === prevArr) {
-          arr2.pop()
-        }
+    if(element === '--double-next'){
+      if(i + 1 < arr.length){
+        resultArray.push(arr[i + 1])
       }
-    }
-
-    else if (arr[i] === '--double-prev') {
-      if(i > 0){
-        let prevArr2 = arr2[arr2.length - 1], prevArr = arr[i - 1];
-        if(isNaN(prevArr2)){
-          prevArr2 += '';
-          prevArr += ''
-        };
-        if (prevArr2 === prevArr) {
-          arr2.push(arr2[arr2.length - 1])
+      continue
+    } else if (element === '--double-prev'){
+      if(i - 1 >= 0){
+        if(i === 1 || arr[i - 2] !== '--discard-next'){
+          resultArray.push(arr[i - 1])
         }
       }
-    }
-
-    else if (arr[i] === '--double-next') {
-      if (arr.length > i + 1) {
-        arr2.push(arr[i + 1])
+      continue
+    } else if (element === '--discard-next') {
+      i++;
+      continue
+    } else if (element === '--discard-prev') {
+      if(i - 1 >= 0){
+        if(arr[i - 2] !== '--discard-next'){
+          resultArray.pop()
+        }
       }
-    }
-
-    else {
-      if (arr[i - 1] !== '--discard-next') {
-        arr2.push(arr[i])
-      }
+      continue
+    } else {
+      resultArray.push(element)
     }
   }
-  return arr2;
+  return resultArray;
 };
-
-
